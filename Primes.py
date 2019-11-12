@@ -1,27 +1,26 @@
+#*******************
+#                  *
+# Made by CoolJWB. *
+#                  *
+#*******************
 #
-# Copyright 2019 CoolJWB
+# Runs 1 million primes in 6.8 seconds.
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#    https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
-#
-for x in range(20000):
-    siffsum = (sum(map(float, str(x))))
-    if (siffsum / 3).is_integer() or (siffsum / 9).is_integer() or (x % 2) == 0 or ((x % 100) / 4).is_integer() or (x % 10) == 0 or (x % 10) == 5 or ((x % 1000) / 8).is_integer():
-        continue;
+
+import math;
+import time;
+end = 1000000; # The largest prime value to generate.
+millis = int(round(time.time() * 1000))
+primes = [2, 3, 5, 7, 11, 13];
+
+for x in range(15, 1000000, 2):
+    if (x + 1) % 6 != 0 and (x - 1) % 6 != 0:
+        continue
+    for prime in primes:
+        if x % prime == 0:
+            break;
+        elif prime > math.sqrt(x):
+            primes.append(x); # Add more primes to later re-use them.
+            break;
+print(int(round(time.time() * 1000)) - millis); # The total runtime.
     
-    isPrime = True
-    for z in range(x + 1):
-        if x != 0 and z != 0:
-            if (float(x) / float(z)).is_integer() and z != 1 and z != x:
-                isPrime = False
-    if(isPrime and x != 0 and x != 1):
-        print(x)
