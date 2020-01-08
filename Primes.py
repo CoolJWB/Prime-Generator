@@ -1,26 +1,15 @@
-#*******************
-#                  *
-# Made by CoolJWB. *
-#                  *
-#*******************
-#
-# Runs 1 million primes in 6.8 seconds.
-#
-
-import math;
-import time;
-end = 1000000; # The largest prime value to generate.
-millis = int(round(time.time() * 1000))
-primes = [2, 3, 5, 7, 11, 13];
-
+import math
+import time
+millis = int(round(time.time() * 1000)) # Store current time in ms before run.
+primes = [2, 3, 5, 7, 11, 13]
 for x in range(15, 1000000, 2):
-    if (x + 1) % 6 != 0 and (x - 1) % 6 != 0:
+    if ((x - 1) % 6 != 0 and (x + 1) % 6 != 0) or x % 5 == 0:
         continue
-    for prime in primes:
+    xsqrt = x ** .5
+    for prime in primes: # Iterates over all primes.
         if x % prime == 0:
-            break;
-        elif prime > math.sqrt(x):
-            primes.append(x); # Add more primes to later re-use them.
-            break;
-print(int(round(time.time() * 1000)) - millis); # The total runtime.
-    
+            break
+        elif prime > xsqrt:
+            primes.append(x)
+            break
+print("Duration: " + str(int(round(time.time() * 1000)) - millis) + "ms") # Print time difference in ms after run.
